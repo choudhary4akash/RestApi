@@ -6,9 +6,15 @@ const { receiveMessageOnPort } = require('worker_threads');
 const { error } = require('console');
 
 
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Internal Server Error: ' + err.message);
+  });
+
+
 // get method to for homepage
 app.get('/',(req,res)=>{
-    // console.log(data)
+    
     res.status(200).send("Rest Apis")
 })
 
